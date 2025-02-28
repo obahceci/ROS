@@ -1,0 +1,107 @@
+
+-----px4 kurulum-----
+
+	https://docs.px4.io/main/en/dev_setup/dev_env_linux_ubuntu.html
+
+sitesine git ve gösterilen adımları uygula
+
+
+(ekstra olarak) additional kısmında;
+
+	wget https://raw.githubusercontent.com/PX4/PX4-Autopilot/main/Tools/setup/ubuntu.sh
+	wget https://raw.githubusercontent.com/PX4/PX4-Autopilot/main/Tools/setup/		requirements.txt
+	bash ubuntu.sh
+
+bu kodları terminalde çalıştır.
+
+reboot at ---->   sudo reboot now
+
+
+sonra terminali aç
+		
+	cd PX4-Autopilot/
+	mk px4_sitl jmavsim 
+
+kodlarıyla first build yap
+
+https://docs.px4.io/main/en/dev_setup/building_px4.html#gazebo-classic		#building px4 sayfası
+
+
+
+
+
+
+----QGroundControl kurulum------ 
+	https://docs.qgroundcontrol.com/master/en/qgc-user-guide/getting_started/download_and_install.html
+
+adımları uygula 
+
+
+-----ROS kurulum-----
+
+
+	http://wiki.ros.org/noetic/Installation/Ubuntu#Installation
+
+adımları uygula
+
+
+
+
+-------MAVROS kurulum--------
+
+	https://docs.px4.io/main/en/ros/mavros_installation.html
+adımları uygula fakat;
+
+source installation kısmını yapmadan önce ubuntu 20.04te catkin araçlarını kullanabilmek için manuel olarak kurmamız gerekiyor
+	
+	sudo apt install python3-catkin-tools python3-osrf-pycommon
+kodunu çalıştır
+
+	
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+GAZEBO çalıştırmak için;
+	cd PX4-Autopilot
+	make px4_sitl gazebo-classic_plane
+kapatmak için ;
+		shutdown
+
+
+
+QGroundControl çalıştırmak için ;
+	./QGroundControl.AppImage 
+	
+	
+ROS çalıştırmak için;
+	roscore
+	
+MAVROS çalıştırmak için
+	roslaunch mavros px4.launch fcu_url:="udp://:14540@127.0.0.1:14557"
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
