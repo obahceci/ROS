@@ -1,0 +1,377 @@
+TEMEL LINUX KOMUTLARI;
+
+--TERMİANLDE KULLANILAN KISAYOLLAR
+
+	ctrl +alt+t ile yeni terminal aç 
+	ctrl+shift+w kapat
+	
+	ctrl+shift+c kopyala
+	ctrl+shift+v yapıştır
+	
+	ctrl+a imlecin bulunduğu satırda imleç en başa gider
+	ctrl+e imleç, bulunduğu satırda en sona gider
+	
+	ctrl+r ile yazmış olduğun komutları arar bulur
+	
+	ctrl+p ile komut geçmişinde geriye doğru gideriz	
+	ctrl+n ile komut geçmişinde iler idoğru gideriz
+	
+	ctrl+l ekranı temizler	
+	ctrl+c çalışan komutu durdurur
+	
+--LINUX KOMUTLARININ ÖZELLİKLERİ
+
+	Komutların yapısı {komut_adı} {argüman} şeklindedir
+
+	Birden fazla komut yan yana çağırılabilir "&&" kullanılır
+	Komutları birleştirmek için "|" kullanılır
+	Tab tuşuna basmak komutu tamamlar, iki defa tab tuşuna basmak alternatifleri listeler
+
+
+--SIK KULLANILANLAR
+
+	bash	 - standart kabuğu çağırır
+	cd	 - dizin değiştirmek için kullanılır
+	chmod    - bir dosyanın izlerini değiştirir
+	chown	 - bir dosyanın sahiplerini değiştirir
+	clear 	 - terminali temizler
+	cp   	 - kopyalama işlemi yapar
+	echo	 - değişkenleri terminalde bastırır
+	help	 - kabuk komutlar hakkında bilgi verir
+	history  - komut geçmişini gösterir
+	kill	 - çalışan işlemi bitirir
+	ls	 - mevcut dizindeki dosyaları listeler
+	mkdir	 - klasör oluşturur
+	mv	 - dosya taşıma işlemi yapar
+	ping	 - başka bir cihaza erişim sorgular
+	ps 	 - çalışan işlemleri listeler
+	pwd	 - çalışan dosya yolunu bastırır
+	rm 	 -  bir dosya silmek için kullanılır
+	sudo 	 - bir komutu yetkili kulanıcı olarak çalıştırır
+	top 	 - çalışan işlemler hakkında bilgi verir
+	wget 	 - URL üstünden dosya indirir
+	
+	
+
+
+ROS KAVRAMSAL TEMELLER;
+
+--İSİMLENDİRME KURALLARI
+
+	dosyalar  - Kelimelerin ilk harfleri küçük ve kelimeler arasinda alt çizgi olacak sekilde yazilir. -> hedefe_gitme.py
+	
+	değişkenler - Kelimelerin ilk harfleri küçük ve kelimeler arasinda alt çizgi olacak sekilde yazilir. -> robot_x_konum = 0.0
+	
+	fonksiyonlar - Kelimelerin ilk harfleri küçük ve kelimeler arasinda alt çizgi olacak sekilde yazilir. -> robot_hareket()
+	
+	sınıflar - Kelimelerin ilk harfleri büyük ve kelimeler arasinda bosluk olmayacak sekilde yazilir. -> class MesafeOku():
+	
+	paketler - Kelimelerin ilk harfleri küçük ve kelimeler arasinda alt çizgi olacak sekilde yazilir. -> hedefe_gitme_paketi
+	
+	düğümler - Kelimelerin ilk harfleri küçük ve kelimeler arasinda alt çizgi olacak sekilde yazilir.-> robot_hareket_dugumu
+	
+	konular/servisler - Kelimelerin ilk harfleri küçük ve kelimeler arasinda alt çizgi olacak sekilde yazilir. -> raw_image
+	
+	mesajlar/servisler/aksiyonlar - Kelimelerin ilk harfleri büyük ve kelimeler arasinda bosluk olmayacak sekilde yazilir.İçinde bulunan bilgi alanları yazilirken, "Değişkenler" ifadesindeki 		kural uygulanır örneğin float32 robot_hiz -> KonumMesaji.msg
+	
+	parametreler- Kelimelerin ilk harfleri büyük ve kelimeler arasinda bosluk olmayacak sekilde yazilir. -> TurSayisi: 3
+	
+	
+	
+--ROS MASTER
+
+	Ros sistemindeki diğer düğümlere isimlendirme ve kayıt hizmetleri sağlar
+	Herhangi bir node çalıştırılmadan önce Ros Master çalışıyor olmalı 
+	$ roscore   ile çalıştırılır
+	
+--WORKSPACE
+	
+	konfigürasyon ayarlarını tanımlamak için : 
+	$ source /opt/ros/noetic/setup.bash
+	terminal her açıldığında yazılması gerekir
+	
+	
+	$ gedit ~/.bashrc   komutuyla dosyayı açıp en altına 
+	source /opt/ros/noetic/setup.bash 
+	yaz (kalıcı hale getirir)
+	
+	
+			
+--WORKSPACE OLUŞTURMA
+
+	cd komutuyla terminalimizi home konumuna ayarlarız 
+
+	terminalde mkdir catkin_ws ile directory oluşturulur
+
+	src dosyası için mkdir src komutu kullanılır
+					 
+	build ve devel dosyaları için catkin_make komutu kullanılır(ros komutu)
+
+
+	!!workspace dizini içinde ros tarafından kullanılacak olan parametrelerin ayarlanması için(terminali workspace dizinine getir önce)
+	
+	$ source devel/setup.bash komutunu yaz (terminal her açıldığında yapılır)
+	
+	$ gedit ~/.bashrc komutuyla dosyayı açıp içine source /home/userName/catkin_ws/devel/setup.bash (kalıcı hale getirir)
+	
+
+
+--PAKETLER 
+	
+	ROS'ta yazılımın düzenli olmasını sağlayan ana birimlerdir. Paketler, kodların parçalara bölünerek yeniden kullanılabilmesini sağlar 
+	Paketlerde bulunan bazı klasörler:
+	
+	CMakeLists.txt - Derleyiciye verilen emirleri ve birçok yapı bilgisini içeren dosyasıdır
+	package.xml - Paketlerle alakalı bilgileri içeren bildiri dosyasıdır
+	scripts/ - doğrudan çalıştırılabilir kodların bulunduğu klasördür
+	src/ - programların kaynak dosyalarının bulunduğu klasördür
+	msg/ - mesaj tiplerinin içerildiği klasördür
+	srv/ - servis dosyalarının bulunduğu klasördür
+	action/ - aksiyon dosyalarının bulunduğu klasördür
+	bag/ - kayıt için gereken çanta dosyalrını barındıran klasördür
+	launch/ - Başlatna dosyalarını barındıran dosyadır
+	
+--METAPAKETLER
+	
+	Çoklu paket kümesini gruplandırarak,paketleri organize çalıştırmaya yarar
+
+--PAKET ARAÇLARI 
+
+	rospack - paketleri bulma ve hakkında bilgi edinmeye yarar
+	roscreate-pkg - yeni paket oluşturmaya yarar
+	catkin_create_pkg - yeni paket oluşturmaya yarar
+	rosmake - paketleri derler(compile)
+	rosdep - paketlerin bağımlılıklarını(dependincies) yükler
+	catkin_make - paketlerin çalışma alanını derler
+	rqt - paket bağımlılıklarını grafik olarak görselleştiren bir eklenti 
+	
+	rosbash Aracı:
+	
+	roscd - ROS dizinleri arasında dolaşmak 
+	roscp - ROS dizininde bulunan bir dosyayı başka yere kopyalama
+	rosls - paketteki dosyalarıo listeleme
+	rosd - dizin yığınındaki klasörleri listeler
+	rosrun - executable dosyaların çalışmasını sağlar
+	
+--CMakeLists.txt DOSYASI 
+	
+	dosya formatı:
+	cmake_minimum_required(VERSION x.x.x)- Gerekli CMake sürümü
+	project(project_name) - Paket adı 
+	find_package():Yapılandırma için gerekli diğer CMake/Catkin paketlerini bulma ( Catkine her zaman en az bir bağımlılık vardır *find_package(catkin REQUIRED)* )
+	catkin_python_setup() - python modülü desteğini etkinleştirme
+	add_message_files(),add_service_files(),add_acttion_files() - Mesaj/Servis/Aksiyon üreteçleri
+	generate_messages() - Mesaj/Servis/Aksiyon oluşturmayı başlatma 
+	catkin_package() - paket oluşturma bilgisini doşarı aktarma
+	add_executable() - yürütülebilir hedefler
+	add_library() - yürütülebilir hedefler tarafından kullanılabilir kütüphaneler
+	target_link_libraries() - yürütülebilir bir hedefin hangi kütüphanelere karşı bağlandığını belirtme 
+	catkin_add_gtest() - yapılandırma için testler
+	install() - kurulum
+	
+--package.xml DOSYA FORMATI	
+	<name> - paket adı 
+	<version> - sürümü
+	<description> - paket içeriği açıklaması 
+	<maintainer> - paketi sürdüren kişileri
+	<license> - lisanslar
+	<url> - url
+	<author> - yazarı
+	<depend> - paketin bağlı olduğu paketi belirtir
+	<build_depend> - paketi oluşturmak içi hangi paketler lazım olduğunu belirtir
+	<buildtool_depend> - paketi oluşturmak için ihtiyaç duyulan derleme sistemi araçlarını belirtir
+	<exec_depend> - kod çalıştırmak için hangi paketler gerekli 
+	<test_depend> - birim testleri için ek bağımlılıklar
+	<doc_depend> - paketin belge oluşturmak için ihtiyaç duyduğu araçlar
+	
+--ROS PAKETLERİ
+	Dil paketleri: roslibjs,roscpp,rospy,rosjava
+	robotik uyg: turtlesim , moveit , multimaster_fkie , robot
+	Görselleştirici: rviz , rqt_plot, rqt_graph , gazebo_ros_pkgs
+	kamera ve görüntü: image_geometry ,cv_bridge, pcl_ros,find_objects_2d
+	haritalandırma: gmapping,rtabmap_ros,navigation,amcl
+	mesaj paketleri: geometry_msgs, nav_msgs,sensor_msgs,stereo_msgs
+	
+
+--PAKET OLUŞTURMA VE DERLEME 
+
+	$ cd ~/catkin_ws/src
+	
+	$ catkin_create_pkg ogretici_paket rospy roscpp
+	
+	paketlerin src dosyasında olması gerekli 
+	
+	catkin_create_pkg test_pkg roscpp rospy std_msgs
+	     (komut)	 (paket adı)  (dependencies)
+	    
+	
+	$ cd ~/catkin_ws &&  $ catkin_make   ya da $ catkin_make_isolated (src altında mavlink gibi dosyalar da varsa derleyebilmek için kullanılır)
+	
+	
+	!!!! Bir değişiklik yapıldığında build ve devel dosyalarının tekrar oluşturulması gerekir		
+	
+	
+	eğer catkin_make ile derleme yaparken , "The build space at '/home/obahceci/catkin_ws/build' was previously built by 'catkin build'. Please remove the build space or pick a different build space." 
+	hatası aldıysan build ve devel dosyalarını silip sonra catkin_build çalıştır sonra catkin_make çalıştır.
+	
+	
+--DÜĞÜMLER VE ROSNODE 
+
+	kodları parçalara ayırır ve sistemi basitleştirir
+	ROS düğümlerinde parametreleri değiştirebilme özelliğidir 
+	kod yeniden derlenmeden düğüm yapılandırılabilir,farklı senaryolara kolayca adapte olur 
+	Bir düğümün benzersiz ismi olması lazım 
+	
+	DÜĞÜM ARAÇLARI:
+	rosnode info düğüm_adı - düğüm hakkında bilgileri yazdırır
+	rosnode kill düğüm_adı - çalışan bir düğümü sonlandırır
+	rosnode list - aktif düğümleri listeler
+	rosnode machine hostname - belirli bir makinede çalışan düğümleri listeler
+	rosnode ping düğüm_adı - düğümle olan bağlantıyı test eder
+	rosnode cleanup - ulaşılamayan düğümlerin kayıt bilgilerini temizler
+	
+--DÜĞÜM OLUŞTURMA(PYTHON)
+
+	1- düğümü ogretici_paket/scripts dosyası altında ilk_dugum.py isminde tutacağız
+	
+	$ roscd ogretici_paket
+	$ mkdir scripts
+	$ cd scripts
+	$ gedit ilk_dugum.py
+	dosyanın içine  #!/usr/bin/env python3  yaz 
+	
+	2- düğümü çalışırılabilir hale getir
+	
+	$ chmod +x ilk_dugum.py
+	
+	python düğümü yazıyorsak catkin_make yapmamıza gerek yok 
+	
+	terminal 1 $ roscore
+	terminal 2 $ rosrun ogretici_paket ilk_dugum.py
+	
+	
+--PARAMETRE SERVİSİ
+
+	ağ API'leri aracılığıyla erişilebilen,paylaşılan, cok değişkenli bir sözlüktür. Düğümler bu servisi kullanarak,çalışma anında parametreleri kullanabilir.
+	
+	Parametre servisi XMLRPC kullanarak uygulanır ve ana ROS çekirdeğinin içinde çalışır 
+	Parametreler ile çalışan düğümleri yapılandırabiliriz
+	Parametereler .yaml uzantılıdır
+	
+	$ rosparam list - sunucudaki tüm parametreleri listeler
+	$ rosparam get parametre_adı - bir parametrenin değerini alır 
+	$ rosparam set parametre_adı x - bir parametrenin değerini ayarlar(x: bir değere eşit)
+	$ rosparam delete parametre_adı - parametreyi siler
+	$ rosparam dump dosya_adı - parametre sunucusunu bir dosyaya kaydeder
+	$ rosparam load dosya_adı - parametre sunucuusunda bir dosyayı yükler
+		
+--MESAJ YAPISI
+
+	Mesajlar düğümlere bilgi sağlayan verileri içeren ve düğümler arasındaki haberleşmeyi sağlayan yapıdır
+	Bir mesaj yapısı tip ve isim parçalarından oluşur arasında boşluk bırakılarak tanımlanır 
+	
+	Mesaj türleri , paket kaynak adları kullanılarak kod içerisinde belirtilirler
+	
+	$ rosmsg list - Tüm mesajları listeler
+	$ rosmsg show mesaj_tipi - mesajın veri tipleri ve değişken isimlerini verir
+	$ rosmsg package paket_adı - belirli paketteki tüm mesajları listeler
+	$ rosmsg packages - mesajı olan tüm paketleri listeler
+	$ rosmsg users mesaj_tipi - mesaj türünü kullanan kod dosyalarını arar
+	
+	
+--MESAJ DOSYASI OLUŞTURMA	
+	
+	1-Çalışma alanındaki oluşturlan paket klasörünün içinde msg dosyası oluşturulur
+	$ cd catkin_ws/src/ogretici_paket ya da $ roscd ogretici_paket/
+	
+	$ mkdir msg && $ cd msg 
+	
+	($ rosmsg package ogretici_paket ile içerisinde mesaj var mı kontrol eder)
+
+	
+	2- Örnek olarak BataryaDurum.msg dosyası oluştur (BataryaDurum.msg string tipinde batarya isminde bir veri tutacak)
+	
+	$ gedit BataryaDurum.msg (İçine veriler yazılır)
+	
+	3- CMakeList.txt düzenleme yapılır
+	
+	$ cd ogretici_paket 
+	$ gedit CMakeList.txt
+	
+	3.1 -> find_package() içine "message_generation" bağımlılığı yazılır
+	3.2 -> catkin_package(içine CATKIN_DEPENDS message_runtime)
+	3.3 -> add_message_files(FILES BataryaDurum.msg)
+	3.4 -> generate_message() aktive et 
+	
+	4-package.xml düzenleme yapılır
+	
+	derleme için 
+	<build_depend>message_generation</build_depend>
+	
+	çalışma için 
+	<exec_depend>message_runtime</exec_depend>
+	
+	ekle
+	
+	5-Çalışma alanında derleme yapılır 
+	
+	$ cd catkin_ws
+	
+	$ catkin_make
+	
+	
+	6-Oluşturtulan mesaj dosyasının başlık dosyalarını yüklemek için
+	$ catkin_make_install
+
+--TOPICS 
+	konular mesaj içeriğini tanımlamak için kullanılan isimlerdir ve düğümlerin üzerinde mesaj alışverişi yaptığı veri yolları olarakadlandırılır
+	genel olarak sensör verileri için kullanılır 
+	kullanılan mesajlar publisher subscriber tipinde olur 
+	konular tek yönlü iletişim içindir bir isteğe bağlı olarak yanıt alması gerken düğümler için servisler kullanılmalıdır
+	
+	$ rostopic bw /konu_adı - konunun kullandığı bant genişliğini gösterir
+	$ rostopic echo /konu_adı - konu versini ekrana bastırır
+	$ rostopic delay /konu_adı - konu için gecikme görüntülemeye yarar
+	$ rostopic find mesaj_tipi - türlerine göre konuları bulur
+	$ rostopic hz /konu_adı - konunun yayınlanma hızını gösterir
+	$ rostopic list - aktif konuları listeler
+	$ rostopic pub /konu_adı mesaj_tipi argümanlar - istenilen konuda doğrudan komut satırından yayın yapmayı sağlar
+	$ rostopic type /konu_adı - konu türünü,yani yayınladığı mesaj türünü gösterir
+	
+	
+	
+--PUBLISHER SUBSCRIBER 
+	BataryaDurum mesaj dosyasını kullanılacaktır
+	
+	1-Scripts klasöründe işlemleri yapılır
+	
+	
+	Scripts dosyası altında python dosyası oluşturulur ve kullanılacak mesaj verisi paketteki mesaj klasöründen import edilir
+	dosya bitince çalıştırılabilir hale getirmek için 
+	
+	$ chmod +x yayinci.py
+	
+	3-Abone(subscriber)düğümü oluşturulacak
+	
+	
+	$ chmod +x abone.py
+	
+
+	4- Çalışma alanı derlenir 
+	$ catkin_make
+	
+	terminal 1 - $roscore
+	terminal 2 - $ rosrun ogretici_paket yayinci.py 
+	terminal 3 - $ rosrun ogretici_paket abone.py 
+	
+	
+
+
+	
+	
+
+	
+	    
+
+
+
